@@ -37,10 +37,10 @@ def send_coins(message):
         bot.reply_to(message, "Недостаточно средств")
         return
 
-    change = float(temp.get("amount")) - float(amount) - 0.001 #
+    change = float(temp.get("amount")) - float(amount) - 0.001
     inputForTransaction = {"txid":temp.get("txid"), "vout": temp.get("vout")}
     try:
-        createTransaction = rpc_connection.createrawtransaction([inputForTransaction], {receiver_address:amount, sender_address:change})
+        createTransaction = rpc_connection.createrawtransaction([inputForTransaction], {receiver_address:amount, sender_address:format(change, ".8g")})
     except JSONRPCException:
         bot.reply_to(message, f"Ошибка2")
         return
